@@ -20,8 +20,9 @@ public class Habitacion {
     private String nombre;
     private Integer personasMaximas;
     private Double precio;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "habitacion_id")
+    @JsonManagedReference
+    @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "habitacion")
     private List<Reserva> reservas;
 
 }

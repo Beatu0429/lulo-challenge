@@ -21,5 +21,11 @@ public class Reserva {
     private String documentoIdentidad;
     private LocalDate fechaIngreso;
     private LocalDate fechaSalida;
+    @JsonBackReference
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "habitacion_id")
+    private Habitacion habitacion;
+
 
 }
