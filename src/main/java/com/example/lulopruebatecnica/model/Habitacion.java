@@ -1,17 +1,20 @@
 package com.example.lulopruebatecnica.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @Table(name = "habitaciones")
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Habitacion {
 
     @Id
@@ -20,9 +23,9 @@ public class Habitacion {
     private String nombre;
     private Integer personasMaximas;
     private Double precio;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "habitacion")
     @JsonManagedReference
-    @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "habitacion")
     private List<Reserva> reservas;
 
 }

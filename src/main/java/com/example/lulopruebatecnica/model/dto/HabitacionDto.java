@@ -2,6 +2,7 @@ package com.example.lulopruebatecnica.model.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -9,12 +10,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class HabitacionDto {
+public class HabitacionDto{
 
     private Long id;
     private String nombre;
     private Integer personasMaximas;
     private Double precio;
-    private List<ReservaDto> reservas;
+    private List<ReservaRespuestaDto> reservas;
 
 }
