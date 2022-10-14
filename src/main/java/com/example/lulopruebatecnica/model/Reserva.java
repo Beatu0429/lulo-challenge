@@ -1,7 +1,6 @@
 package com.example.lulopruebatecnica.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @Table(name = "reservas")
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Reserva {
 
     @Id
@@ -21,10 +21,10 @@ public class Reserva {
     private String documentoIdentidad;
     private LocalDate fechaIngreso;
     private LocalDate fechaSalida;
-    @JsonBackReference
-    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "habitacion_id")
+    @JsonBackReference
     private Habitacion habitacion;
 
 
