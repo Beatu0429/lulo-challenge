@@ -1,5 +1,6 @@
 package com.example.lulopruebatecnica.controller;
 
+import com.example.lulopruebatecnica.model.dto.FechasDisponiblesDto;
 import com.example.lulopruebatecnica.model.dto.HabitacionDto;
 import com.example.lulopruebatecnica.model.dto.ReservaDto;
 import com.example.lulopruebatecnica.service.IHabitacionService;
@@ -38,8 +39,8 @@ public class HabitacionController {
     }
 
     @PostMapping("/disponibles")
-    public ResponseEntity<List<HabitacionDto>> listHabitacionesDisponibles(@RequestBody ReservaDto reservaDto){
-        return new ResponseEntity(habitacionService.listHabitaciones(reservaDto.getFechaIngreso(), reservaDto.getFechaSalida()), HttpStatus.OK);
+    public ResponseEntity<List<HabitacionDto>> listHabitacionesDisponibles(@RequestBody FechasDisponiblesDto fechasDisponiblesDto){
+        return new ResponseEntity(habitacionService.listHabitaciones(fechasDisponiblesDto.getFechaIngreso(), fechasDisponiblesDto.getFechaSalida()), HttpStatus.OK);
     }
 }
 
