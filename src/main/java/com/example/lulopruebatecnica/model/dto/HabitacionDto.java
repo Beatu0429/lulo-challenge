@@ -2,7 +2,6 @@ package com.example.lulopruebatecnica.model.dto;
 
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Getter

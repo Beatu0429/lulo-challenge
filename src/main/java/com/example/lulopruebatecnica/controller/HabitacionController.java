@@ -1,5 +1,7 @@
 package com.example.lulopruebatecnica.controller;
 
+import com.example.lulopruebatecnica.exceptions.BadRequestException;
+import com.example.lulopruebatecnica.exceptions.ResourceNotFoundException;
 import com.example.lulopruebatecnica.model.dto.HabitacionDto;
 import com.example.lulopruebatecnica.model.dto.ReservaDto;
 import com.example.lulopruebatecnica.service.IHabitacionService;
@@ -23,12 +25,12 @@ public class HabitacionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HabitacionDto> readHabitacion(@PathVariable Long id){
+    public ResponseEntity<HabitacionDto> readHabitacion(@PathVariable Long id) throws ResourceNotFoundException {
         return new ResponseEntity(habitacionService.readHabitacion(id), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<HabitacionDto> updateHabitacion(@RequestBody HabitacionDto habitacionDto){
+    public ResponseEntity<HabitacionDto> updateHabitacion(@RequestBody HabitacionDto habitacionDto) throws BadRequestException {
         return new ResponseEntity(habitacionService.updateHabitacion(habitacionDto), HttpStatus.OK);
     }
 
@@ -38,7 +40,7 @@ public class HabitacionController {
     }
 
     @PostMapping("/disponibles")
-    public ResponseEntity<List<HabitacionDto>> listHabitacionesDisponibles(@RequestBody ReservaDto reservaDto){
+    public ResponseEntity<List<HabitacionDto>> listHabitacionesDisponibles(@RequestBody ReservaDto reservaDto) throws BadRequestException {
         return new ResponseEntity(habitacionService.listHabitaciones(reservaDto.getFechaIngreso(), reservaDto.getFechaSalida()), HttpStatus.OK);
     }
 }
