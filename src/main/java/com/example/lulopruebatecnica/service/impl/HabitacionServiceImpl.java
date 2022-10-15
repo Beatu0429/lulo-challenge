@@ -1,5 +1,7 @@
 package com.example.lulopruebatecnica.service.impl;
 
+import com.example.lulopruebatecnica.exceptions.BadRequestException;
+import com.example.lulopruebatecnica.exceptions.ResourceNotFoundException;
 import com.example.lulopruebatecnica.model.Habitacion;
 import com.example.lulopruebatecnica.model.dto.HabitacionDto;
 import com.example.lulopruebatecnica.repository.IHabitacionRepository;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -35,17 +39,18 @@ public class HabitacionServiceImpl implements IHabitacionService {
     }
 
     @Override
-    public HabitacionDto readHabitacion(Long id) {
+    public HabitacionDto readHabitacion(Long id) throws ResourceNotFoundException {
         HabitacionDto habitacionDto = null;
         if (habitacionRepository.findById(id).isPresent()){
             Optional<Habitacion> habitacion = habitacionRepository.findById(id);
             habitacionDto = mapper.map(habitacion.get(), HabitacionDto.class);
+            return habitacionDto;
         }
-        return habitacionDto;
+        throw new ResourceNotFoundException("No se pudo encontrar la habitación solicitada.");
     }
 
     @Override
-    public HabitacionDto updateHabitacion(HabitacionDto habitacionDto) {
+    public HabitacionDto updateHabitacion(HabitacionDto habitacionDto) throws BadRequestException {
         if (habitacionDto.getId() != null){
             Habitacion habitacion = mapper.map(habitacionDto, Habitacion.class);
             habitacion = habitacionRepository.save(habitacion);
@@ -54,7 +59,7 @@ public class HabitacionServiceImpl implements IHabitacionService {
                 return habitacionSaved;
             }
         }
-        return null;
+        throw new BadRequestException("Para actualizar la habitación debe ingresar el id.");
     }
 
     @Override
@@ -64,13 +69,13 @@ public class HabitacionServiceImpl implements IHabitacionService {
     }
 
     @Override
-    public List<HabitacionDto> listHabitaciones(LocalDate fechaIngreso, LocalDate fechaSalida) {
+    public List<HabitacionDto> listHabitaciones(LocalDate fechaIngreso, LocalDate fechaSalida) throws BadRequestException {
         if (fechaIngreso.isAfter(fechaSalida)){
-            return null;
+            throw new BadRequestException("La fecha de salida debe ser posterior a la fecha de ingreso.");
         }
         LocalDate fechaActual = LocalDate.now();
         if (fechaIngreso.isBefore(fechaActual)){
-            return null;
+            throw new BadRequestException("La fecha de ingreso no debe ser antes de la fecha actual.");
         }
         List<Habitacion> habitacionesDisponibles = habitacionRepository.getHabitacionesDisponibles(fechaIngreso, fechaActual, fechaSalida);
         List<HabitacionDto> listDisponibles = new ArrayList<>();

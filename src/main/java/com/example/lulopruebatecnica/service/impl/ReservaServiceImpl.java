@@ -1,5 +1,8 @@
 package com.example.lulopruebatecnica.service.impl;
 
+import com.example.lulopruebatecnica.exceptions.BadRequestException;
+import com.example.lulopruebatecnica.exceptions.ForbidenRequestException;
+import com.example.lulopruebatecnica.exceptions.ResourceNotFoundException;
 import com.example.lulopruebatecnica.model.Habitacion;
 import com.example.lulopruebatecnica.model.Reserva;
 import com.example.lulopruebatecnica.model.dto.ReservaDto;
@@ -31,7 +34,7 @@ public class ReservaServiceImpl implements IReservaService {
 
 
     @Override
-    public ReservaDto createReserva(ReservaDto reservaDto) {
+    public ReservaDto createReserva(ReservaDto reservaDto) throws ForbidenRequestException {
         LocalDate fechaActual = LocalDate.now();
         List<Habitacion> habitacionesDisponibles = habitacionRepository.getHabitacionesDisponibles(reservaDto.getFechaIngreso(), fechaActual, reservaDto.getFechaSalida());
         boolean habitacionEsDisponible = this.habitacionEstaDisponible(habitacionesDisponibles, reservaDto.getHabitacion().getId());
@@ -41,28 +44,29 @@ public class ReservaServiceImpl implements IReservaService {
             ReservaDto reservaSaved = mapper.map(reserva, ReservaDto.class);
             return reservaSaved;
         }
-        return null;
+        throw new ForbidenRequestException("La habitación no se encuentra disponible para reserva en las fechas solicitas.");
     }
 
     @Override
-    public ReservaDto readReserva(Long id) {
+    public ReservaDto readReserva(Long id) throws ResourceNotFoundException {
         ReservaDto reservaDto = null;
         if(reservaRepository.findById(id).isPresent()){
             Optional<Reserva> reserva = reservaRepository.findById(id);
             reservaDto = mapper.map(reserva.get(), ReservaDto.class);
+            return reservaDto;
         }
-        return reservaDto;
+        throw new ResourceNotFoundException("No se pudo encontrar la reserva solicitada.");
     }
 
     @Override
-    public ReservaDto updateReserva(ReservaDto reservaDto) {
+    public ReservaDto updateReserva(ReservaDto reservaDto) throws BadRequestException {
         if(reservaDto.getId() != null){
             Reserva reserva = mapper.map(reservaDto, Reserva.class);
             reserva = reservaRepository.save(reserva);
             ReservaDto reservaSaved = mapper.map(reserva, ReservaDto.class);
             return reservaSaved;
         }
-        return null;
+        throw new BadRequestException("Para actualizar la reserva debe ingresar el id.");
     }
 
     @Override
