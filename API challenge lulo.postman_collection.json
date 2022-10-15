@@ -1,0 +1,508 @@
+{
+	"info": {
+		"_postman_id": "dc451707-fcc3-4288-b8ba-0a699eee71f2",
+		"name": "API challenge lulo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20438431"
+	},
+	"item": [
+		{
+			"name": "crear habitacion 101",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set('id_habitacion', jsonData.id);\r",
+							"\r",
+							"pm.collectionVariables.set('nombre_habitacion', jsonData.nombre);\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"101\",\r\n    \"personasMaximas\": 2,\r\n    \"precio\": 50.5\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones",
+					"host": [
+						"{{URL}}habitaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear habitacion 102",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"102\",\r\n    \"personasMaximas\": 5,\r\n    \"precio\": 80.5\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones",
+					"host": [
+						"{{URL}}habitaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear habitacion 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"201\",\r\n    \"personasMaximas\": 2,\r\n    \"precio\": 60.5\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones",
+					"host": [
+						"{{URL}}habitaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear reserva exitosa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set('id_reserva', jsonData.id);\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreHuesped\": \"Ernesto Perez\",\r\n    \"documentoIdentidad\": \"123456\",\r\n    \"fechaIngreso\": \"2022-10-26\",\r\n    \"fechaSalida\": \"2022-10-30\",\r\n    \"habitacion\": {\r\n        \"id\": {{id_habitacion}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}reservas",
+					"host": [
+						"{{URL}}reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear reserva con fecha repetida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"La habitación no se encuentra disponible para reserva en las fechas solicitas.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombreHuesped\": \"Ernesto Perez\",\r\n    \"documentoIdentidad\": \"123456\",\r\n    \"fechaIngreso\": \"2022-10-26\",\r\n    \"fechaSalida\": \"2022-10-30\",\r\n    \"habitacion\": {\r\n        \"id\": {{id_habitacion}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}reservas",
+					"host": [
+						"{{URL}}reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar habitaciones disponibles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fechaIngreso\": \"2022-10-20\",\r\n    \"fechaSalida\": \"2022-10-25\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones/disponibles",
+					"host": [
+						"{{URL}}habitaciones"
+					],
+					"path": [
+						"disponibles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar habitaciones disponibles fecha anterior a la actual",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"La fecha de ingreso no debe ser antes de la fecha actual.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fechaIngreso\": \"2022-10-13\",\r\n    \"fechaSalida\": \"2022-10-25\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones/disponibles",
+					"host": [
+						"{{URL}}habitaciones"
+					],
+					"path": [
+						"disponibles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar habitaciones disponibles fechas invertidas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"La fecha de salida debe ser posterior a la fecha de ingreso.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fechaIngreso\": \"2022-10-25\",\r\n    \"fechaSalida\": \"2022-10-20\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones/disponibles",
+					"host": [
+						"{{URL}}habitaciones"
+					],
+					"path": [
+						"disponibles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar habitacion por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}habitaciones/{{id_habitacion}}",
+					"host": [
+						"{{URL}}habitaciones"
+					],
+					"path": [
+						"{{id_habitacion}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar habitacion por id inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"No se pudo encontrar la habitación solicitada.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}habitaciones/0",
+					"host": [
+						"{{URL}}habitaciones"
+					],
+					"path": [
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar reserva por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}habitaciones/{{id_reserva}}",
+					"host": [
+						"{{URL}}habitaciones"
+					],
+					"path": [
+						"{{id_reserva}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizar habitacion 101 sin id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Para actualizar la habitación debe ingresar el id.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"101\",\r\n    \"personasMaximas\": 2,\r\n    \"precio\": 50.5\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}habitaciones",
+					"host": [
+						"{{URL}}habitaciones"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:8080/"
+		},
+		{
+			"key": "id_habitacion",
+			"value": ""
+		},
+		{
+			"key": "nombre_habitacion",
+			"value": ""
+		},
+		{
+			"key": "id_reserva",
+			"value": ""
+		},
+		{
+			"key": "fecha_ingreso",
+			"value": ""
+		},
+		{
+			"key": "fecha_salida",
+			"value": ""
+		}
+	]
+}
