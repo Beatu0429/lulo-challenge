@@ -1,0 +1,420 @@
+{
+	"id": "7106f6b5-21cd-40b2-a3d1-4be2b7607df2",
+	"name": "API challenge lulo",
+	"timestamp": "2022-10-15T04:17:06.899Z",
+	"collection_id": "20438431-dc451707-fcc3-4288-b8ba-0a699eee71f2",
+	"folder_id": 0,
+	"environment_id": "20438431-d06b3726-6de5-465e-abe5-1937dc8e1191",
+	"totalPass": 17,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "b486f07d-f3f7-4d9a-9d7e-0071d35f34ea",
+			"name": "crear habitacion 101",
+			"url": "http://localhost:8080/habitaciones",
+			"time": 568,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				568
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "9cd4a784-bb71-471e-8b9a-4cfece6d56d0",
+			"name": "crear habitacion 102",
+			"url": "http://localhost:8080/habitaciones",
+			"time": 12,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "6be85cab-13b5-4bfe-8088-fdb26fd913e0",
+			"name": "crear habitacion 201",
+			"url": "http://localhost:8080/habitaciones",
+			"time": 13,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "23da4e0f-b40c-4083-8aac-ca65f1e73e78",
+			"name": "crear reserva exitosa",
+			"url": "http://localhost:8080/reservas",
+			"time": 180,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				180
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "c2ed6f16-e5f1-441f-90b4-5c823302f1af",
+			"name": "crear reserva con fecha repetida",
+			"url": "http://localhost:8080/reservas",
+			"time": 18,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status code is 403": true,
+				"Body is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 403": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"Status code is 403": true,
+					"Body is correct": true
+				}
+			]
+		},
+		{
+			"id": "e5edcf7f-73d7-41a4-a48b-4933b34fb204",
+			"name": "Listar habitaciones disponibles",
+			"url": "http://localhost:8080/habitaciones/disponibles",
+			"time": 51,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				51
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "facc1bf5-167b-4196-aca2-3425be971709",
+			"name": "Listar habitaciones disponibles fecha anterior a la actual",
+			"url": "http://localhost:8080/habitaciones/disponibles",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Body is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Body is correct": true
+				}
+			]
+		},
+		{
+			"id": "8f2f610e-2e3a-4c24-9fc2-ef709747826e",
+			"name": "Listar habitaciones disponibles fechas invertidas",
+			"url": "http://localhost:8080/habitaciones/disponibles",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Body is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Body is correct": true
+				}
+			]
+		},
+		{
+			"id": "f4f39411-9eca-4879-be5d-994aa8a1e027",
+			"name": "consultar habitacion por id",
+			"url": "http://localhost:8080/habitaciones/1",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "c20b3308-1bbe-470d-b4bd-a25b29249f9c",
+			"name": "consultar habitacion por id inexistente",
+			"url": "http://localhost:8080/habitaciones/0",
+			"time": 9,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true,
+				"Body is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 404": true,
+					"Body is correct": true
+				}
+			]
+		},
+		{
+			"id": "e6d11c44-1fc0-40fc-b2e9-ca8c25bf2820",
+			"name": "consultar reserva por id",
+			"url": "http://localhost:8080/habitaciones/1",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "9d3834d2-de7d-4982-938d-135b370e5499",
+			"name": "actualizar habitacion 101 sin id",
+			"url": "http://localhost:8080/habitaciones",
+			"time": 8,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true,
+				"Body is correct": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Body is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 400": true,
+					"Body is correct": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 916,
+	"collection": {
+		"requests": [
+			{
+				"id": "b486f07d-f3f7-4d9a-9d7e-0071d35f34ea",
+				"method": "POST"
+			},
+			{
+				"id": "9cd4a784-bb71-471e-8b9a-4cfece6d56d0",
+				"method": "POST"
+			},
+			{
+				"id": "6be85cab-13b5-4bfe-8088-fdb26fd913e0",
+				"method": "POST"
+			},
+			{
+				"id": "23da4e0f-b40c-4083-8aac-ca65f1e73e78",
+				"method": "POST"
+			},
+			{
+				"id": "c2ed6f16-e5f1-441f-90b4-5c823302f1af",
+				"method": "POST"
+			},
+			{
+				"id": "e5edcf7f-73d7-41a4-a48b-4933b34fb204",
+				"method": "POST"
+			},
+			{
+				"id": "facc1bf5-167b-4196-aca2-3425be971709",
+				"method": "POST"
+			},
+			{
+				"id": "8f2f610e-2e3a-4c24-9fc2-ef709747826e",
+				"method": "POST"
+			},
+			{
+				"id": "f4f39411-9eca-4879-be5d-994aa8a1e027",
+				"method": "GET"
+			},
+			{
+				"id": "c20b3308-1bbe-470d-b4bd-a25b29249f9c",
+				"method": "GET"
+			},
+			{
+				"id": "e6d11c44-1fc0-40fc-b2e9-ca8c25bf2820",
+				"method": "GET"
+			},
+			{
+				"id": "9d3834d2-de7d-4982-938d-135b370e5499",
+				"method": "PUT"
+			}
+		]
+	}
+}
